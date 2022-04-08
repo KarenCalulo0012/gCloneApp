@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.appscals.googleclone.components.BottomMenu
 import com.appscals.googleclone.components.DrawerMenu
 import com.appscals.googleclone.components.HomeAppBar
+import com.appscals.googleclone.components.MailList
 import com.appscals.googleclone.ui.theme.GoogleCloneTheme
 
 class MainActivity : ComponentActivity() {
@@ -47,7 +48,7 @@ fun GCloneIndex() {
         drawerContent = { DrawerMenu(scrollState) },
         bottomBar = { BottomMenu() }
     ) {
-
+        MailList(it)
     }
 }
 
