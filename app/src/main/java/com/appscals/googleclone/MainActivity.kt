@@ -4,12 +4,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.appscals.googleclone.components.DrawerMenu
+import com.appscals.googleclone.components.HomeAppBar
 import com.appscals.googleclone.ui.theme.GoogleCloneTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    GCloneIndex()
                 }
             }
         }
@@ -30,14 +35,24 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun GCloneIndex() {
+    val scaffoldState = rememberScaffoldState()
+    val coroutineScope = rememberCoroutineScope()
+    val scrollState = rememberScrollState()
+
+    Scaffold(
+        scaffoldState = scaffoldState,
+        topBar = { HomeAppBar(scaffoldState, coroutineScope) },
+        drawerContent = { DrawerMenu(scrollState) }
+    ) {
+
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     GoogleCloneTheme {
-        Greeting("Android")
+        GCloneIndex()
     }
 }
