@@ -13,10 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.appscals.googleclone.components.BottomMenu
-import com.appscals.googleclone.components.DrawerMenu
-import com.appscals.googleclone.components.HomeAppBar
-import com.appscals.googleclone.components.MailList
+import com.appscals.googleclone.components.*
 import com.appscals.googleclone.ui.theme.GoogleCloneTheme
 
 class MainActivity : ComponentActivity() {
@@ -46,9 +43,10 @@ fun GCloneIndex() {
         scaffoldState = scaffoldState,
         topBar = { HomeAppBar(scaffoldState, coroutineScope) },
         drawerContent = { DrawerMenu(scrollState) },
-        bottomBar = { BottomMenu() }
+        bottomBar = { BottomMenu() },
+        floatingActionButton = { MailFAB(scrollState) }
     ) {
-        MailList(it)
+        MailList(it, scrollState)
     }
 }
 
