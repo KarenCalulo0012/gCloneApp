@@ -2,6 +2,7 @@ package com.appscals.googleclone.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,6 +10,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,7 +23,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeAppBar(scaffoldState: ScaffoldState, coroutineScope: CoroutineScope) {
+fun HomeAppBar(
+    scaffoldState: ScaffoldState,
+    coroutineScope: CoroutineScope,
+    openDialog: MutableState<Boolean>
+) {
     Box(modifier = Modifier.padding(10.dp)) {
         Card(
             modifier = Modifier
@@ -55,11 +61,13 @@ fun HomeAppBar(scaffoldState: ScaffoldState, coroutineScope: CoroutineScope) {
                     contentDescription = "logo",
                     modifier = Modifier
                         .size(30.dp)
-                        .clip(
-                            CircleShape
-                        )
+                        .clip(CircleShape)
                         .background(Color.DarkGray)
+                        .clickable {
+                            openDialog.value = true
+                        }
                 )
+                if (openDialog.value) AccountDialog(openDialog)
             }
 
         }
